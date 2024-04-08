@@ -43,13 +43,22 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="<c:url value="/html/"/>">HTML</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="<c:url value="/jquery/"/>">jQuery</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="<c:url value="/ajax/"/>">Ajax</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/geo/"/>">Geo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Cust</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Item</a>
             </li>
         </ul>
     </div>
