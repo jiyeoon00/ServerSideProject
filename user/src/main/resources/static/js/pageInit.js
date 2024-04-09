@@ -1,5 +1,7 @@
 let login = {
-    init:function(){
+    url: '',
+    init:function(url){
+        this.url = url;
         $('#login_form > button').click(function(){
             let id = $('#id').val();
             let pwd = $('#pwd').val();
@@ -19,7 +21,7 @@ let login = {
     send:function(){
         $('#login_form').attr({
             'method':'post',
-            'action':'/loginimpl'
+            'action':this.url
         });
         $('#login_form').submit();
     }

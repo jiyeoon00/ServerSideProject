@@ -3,13 +3,13 @@
 
 <script>
     $(function(){
-        login.init();
+        login.init('<c:url value="/loginimpl"/>');
     });
 </script>
 
 <div class="container">
     <h2>Login Page</h2>
-    <form action="/loginimpl" method="post">
+    <form id="login_form">a
         <div class="form-group">
             <label for="id">ID:</label>
             <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
@@ -19,6 +19,6 @@
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
         </div>
 
-        <button type="submit" class="btn btn-primary">LOGIN</button>
+        <button type="button" class="btn btn-primary">LOGIN</button>
     </form>
 </div>
