@@ -41,6 +41,9 @@ dependencies {
     // Mybatis & Mysql
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
     runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Mysql handler
+    implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.2'
 }
 
 tasks.named('test') {
