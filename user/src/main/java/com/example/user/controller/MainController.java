@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.user.app.data.dto.CustDto;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -46,6 +48,17 @@ public class MainController {
 	@RequestMapping("/register")
 	public String register(Model model){
 		model.addAttribute("center","register");
+		return "index";
+	}
+
+	@RequestMapping("/registerimpl")
+	public String registerimpl(
+		Model model,
+		CustDto custDto,
+		HttpSession httpSession)
+	{
+		httpSession.setAttribute("id", custDto.getId());
+
 		return "index";
 	}
 }
