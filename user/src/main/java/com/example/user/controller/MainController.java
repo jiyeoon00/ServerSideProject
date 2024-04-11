@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.user.app.data.dto.CustDto;
 import com.example.user.app.service.CustService;
@@ -70,8 +71,24 @@ public class MainController {
 		CustDto custDto,
 		HttpSession httpSession)
 	{
-		httpSession.setAttribute("id", custDto.getId());
-
+		try {
+			custService.add(custDto);
+			httpSession.setAttribute("id", custDto.getId());
+		} catch (Exception e) {
+			//throw new RuntimeException(e);
+			model.addAttribute("center","registerfail");
+		}
 		return "index";
+	}
+
+	@ResponseBody
+	@RequestMapping("/registercheckid")
+	public Object registercheckid(@RequestParam("id") String id) throws Exception {
+		String result = "0";
+		CustDto custDto = custService.get(id);
+		if(custDto == null){
+			result = "1";
+		}
+		return result;
 	}
 }
