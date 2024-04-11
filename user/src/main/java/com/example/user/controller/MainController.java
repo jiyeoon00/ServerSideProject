@@ -6,11 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.user.app.data.dto.CustDto;
+import com.example.user.app.service.CustService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
+	private final CustService custService;
+
 	@RequestMapping("/")
 	public String main() {
 		return "index";
@@ -37,9 +42,17 @@ public class MainController {
 		@RequestParam("pwd") String pwd,
 		HttpSession httpSession)
 	{
-		if(id.equals("qqq") && pwd.equals("111")) {
+		CustDto custDto = null;
+		try {
+			custDto = custService.get(id);
+			if(custDto == null){
+				throw new Exception();
+			}
+			if(!custDto.getPwd().equals(pwd)){
+				throw new Exception();
+			}
 			httpSession.setAttribute("id", id);
-		} else {
+		} catch (Exception exception){
 			model.addAttribute("center","loginfail");
 		}
 		return "index";
