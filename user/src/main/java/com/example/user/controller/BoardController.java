@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.user.app.data.dto.BoardDto;
 import com.example.user.app.service.BoardService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -48,5 +50,25 @@ public class BoardController {
 
 		model.addAttribute("center",dir+"get");
 		return "index";
+	}
+
+	@RequestMapping("/detail")
+	public String detail(Model model, @RequestParam("id") int id, HttpSession httpSession) throws Exception {
+		BoardDto boardDto = null;
+		try {
+			boardDto = boardService.get(id);
+
+			if(httpSession != null &&
+				!boardDto.getCustId().equals(httpSession.getAttribute("id"))){
+				boardService.cntUpdate(id);
+			}
+
+			model.addAttribute("board", boardDto);
+			model.addAttribute("center", dir+"detail");
+		} catch (Exception exception) {
+			throw exception;
+		}
+		return "index";
+
 	}
 }
