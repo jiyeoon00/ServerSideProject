@@ -71,4 +71,26 @@ public class BoardController {
 		return "index";
 
 	}
+
+	@RequestMapping("/delete")
+	public String delete(Model model,@RequestParam("id") int id){
+
+		try {
+			boardService.del(id);
+			return "redirect:/board/get";
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@RequestMapping("/update")
+	public String update(Model model,BoardDto boardDto){
+
+		try {
+			boardService.modify(boardDto);
+			return "redirect:/board/detail?id="+boardDto.getBoardId();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
