@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.user.app.data.dto.BoardDto;
 import com.example.user.app.service.BoardService;
+import com.github.pagehelper.PageInfo;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -92,5 +93,20 @@ public class BoardController {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@RequestMapping("/allpage")
+	public String allpage(@RequestParam(value = "pageNo", defaultValue = "1")
+		int pageNo, Model model){
+		PageInfo<BoardDto> p;
+		try {
+			p = new PageInfo<>(boardService.getPage(pageNo), 5); // 5:하단 네비게이션 개수
+			model.addAttribute("cpage", p);
+			model.addAttribute("target", "/board");
+			model.addAttribute("center",dir+"allpage");
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return "index";
 	}
 }
